@@ -1,10 +1,8 @@
 # -*- coding:utf-8 -*-
 #imports 
-from luma.core.interface.serial import i2c, spi
 from luma.core.render import canvas
 from luma.core.sprite_system import framerate_regulator
 from luma.core import lib
-from luma.oled.device import sh1106
 import RPi.GPIO as GPIO
 import datetime
 import time
@@ -19,7 +17,6 @@ import struct
 import smbus
 
 UPS = 1 # 1 = UPS Lite connected / 0 = No UPS Lite hat
-SCNTYPE = 1 # 1= OLED #2 = TERMINAL MODE BETA TESTS VERSION
 
 def readVoltage(bus):
         "This function returns as float the voltage from the Raspi UPS Hat via the provided SMBus object"
@@ -39,19 +36,24 @@ def readCapacity(bus):
         return capacity
 
 
-bus = smbus.SMBus(1)  # 0 = /dev/i2c-0 (port I2C0), 1 = /dev/i2c-1 (port I2C1)
-
 GPIO.setwarnings(False)
 #P4wnP1 essential const
 hidpath = "/usr/local/P4wnP1/HIDScripts/"
 sshpath = "/usr/local/P4wnP1/scripts/"
+displayConfPath = "./conf.txt"
+
+#read in config file and setup device
+parser = cmdline.create_parser(description=None)
+conf = cmdline.load_config(displayConfPath)
+args = parser.parse_args(conf)
+device = cmdline.create_device(args)
 
 # Load default font.
 font = ImageFont.load_default()
 # Create blank image for drawing.
 # Make sure to create image with mode '1' for 1-bit color.
-width = 128
-height = 64
+width = args.width
+height = args.height
 image = Image.new('1', (width, height))
 # First define some constants to allow easy resizing of shapes.
 padding = -2
@@ -68,13 +70,10 @@ brightness = 255 #Max
 fichier=""
 # Move left to right keeping track of the current x position for drawing shapes.
 x = 0
-RST = 25
-CS = 8
-DC = 24
 
 #GPIO define and OLED configuration
-RST_PIN        = 25 #waveshare settings
-CS_PIN         = 8  #waveshare settings
+RST_PIN        = args.gpio-reset #waveshare settings
+CS_PIN         = args.gpio-data-command  #waveshare settings
 DC_PIN         = 24 #waveshare settings
 KEY_UP_PIN     = 6  #stick up
 KEY_DOWN_PIN   = 19 #stick down
@@ -98,16 +97,8 @@ GPIO.setup(KEY3_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP)      # Input with pull-u
 screensaver = 0
 #SPI
 #serial = spi(device=0, port=0, bus_speed_hz = 8000000, transfer_size = 4096, gpio_DC = 24, gpio_RST = 25)
-if SCNTYPE == 1:
-    if  USER_I2C == 1:
-        GPIO.setmode(GPIO.BCM)
-        GPIO.setup(RST,GPIO.OUT)
-        GPIO.output(RST,GPIO.HIGH)
-        serial = i2c(port=1, address=0x3c)
-    else:
-        serial = spi(device=0, port=0, bus_speed_hz = 8000000, transfer_size = 4096, gpio_DC = 24, gpio_RST = 25)
-if SCNTYPE == 1:
-    device = sh1106(serial, rotate=2) #sh1106
+
+#new code goes here
 def DisplayText(l1,l2,l3,l4,l5,l6,l7):
     # simple routine to display 7 lines of text
     if SCNTYPE == 1:

@@ -17,6 +17,8 @@ def posn(angle, arm_length):
     dy = int(math.sin(math.radians(angle)) * arm_length)
     return (dx, dy)
 
+today_last_time = "Unknown"
+
 while True:
     now = datetime.datetime.now()
     today_date = now.strftime("%d %b %y")

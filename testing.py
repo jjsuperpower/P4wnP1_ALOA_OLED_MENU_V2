@@ -3,7 +3,7 @@ import math
 import time
 import datetime
 from luma.core import cmdline
-from luma.core.render import canvas
+from luma.core.render import canvas 
 
 #read in config file and setup device
 parser = cmdline.create_parser(description=None)

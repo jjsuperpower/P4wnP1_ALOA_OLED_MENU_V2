@@ -92,6 +92,15 @@ def main():
 
 if __name__ == "__main__":
     try:
+        parser = cmdline.create_parser(description=None)
+        conf = cmdline.load_config("./lcd.conf")
+        args = parser.parse_args(conf)
+        print(print(display_settings(args)))
+        print("testing")
+        try:
+            device = cmdline.create_device(args)
+        except error.Error as e:
+            parser.error(e)
         main()
     except KeyboardInterrupt:
         pass

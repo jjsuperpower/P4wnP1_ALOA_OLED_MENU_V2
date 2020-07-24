@@ -17,7 +17,7 @@ import struct
 import smbus
 
 UPS = 1  # 1 = UPS Lite connected / 0 = No UPS Lite hat
-SCNTYPE == 1 #1 writes to display, #2 rights to terminal output
+SCNTYPE = 1 #1 writes to display, #2 rights to terminal output
 
 def readVoltage(bus):
         "This function returns as float the voltage from the Raspi UPS Hat via the provided SMBus object"

@@ -2,7 +2,7 @@
 #imports 
 from luma.core.render import canvas
 from luma.core.sprite_system import framerate_regulator
-from luma.core import lib
+from luma.core import lib,cmdline
 import RPi.GPIO as GPIO
 import datetime
 import time

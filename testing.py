@@ -92,7 +92,7 @@ def main():
 
 if __name__ == "__main__":
     try:
-        parser = cmdline.create_parser(description=None)
+        parser = cmdline.create_parser(description="Does this realy matter?")
         conf = cmdline.load_config("./lcd.conf")
         args = parser.parse_args(conf)
         print(print(display_settings(args)))

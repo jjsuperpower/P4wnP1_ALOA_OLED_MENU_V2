@@ -11,6 +11,12 @@ conf = cmdline.load_config("lcd.conf")
 args = parser.parse_args(conf)
 device = cmdline.create_device(args)
 
+
+def posn(angle, arm_length):
+    dx = int(math.cos(math.radians(angle)) * arm_length)
+    dy = int(math.sin(math.radians(angle)) * arm_length)
+    return (dx, dy)
+
 while True:
     now = datetime.datetime.now()
     today_date = now.strftime("%d %b %y")
@@ -46,4 +52,4 @@ while True:
             draw.text((2 * (cx + margin), cy - 8), today_date, fill="yellow")
             draw.text((2 * (cx + margin), cy), today_time, fill="yellow")
 
-        time.sleep(0.1)
+    time.sleep(0.1)

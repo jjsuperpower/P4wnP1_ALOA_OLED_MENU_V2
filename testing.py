@@ -40,9 +40,9 @@ args = parser.parse_args(conf)
 print(print(display_settings(args)))
 print("testing")
 try:
-        device = cmdline.create_device(args)
-    except error.Error as e:
-        parser.error(e)
+    device = cmdline.create_device(args)
+except error.Error as e:
+    parser.error(e)
 
 
 def posn(angle, arm_length):

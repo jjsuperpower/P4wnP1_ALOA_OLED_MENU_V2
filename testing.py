@@ -7,7 +7,7 @@ from luma.core.render import canvas
 
 #read in config file and setup device
 parser = cmdline.create_parser(description=None)
-conf = cmdline.load_config("lcd.conf")
+conf = cmdline.load_config(config="lcd.conf")
 args = parser.parse_args(conf)
 device = cmdline.create_device(args)
 

@@ -42,7 +42,7 @@ print("testing")
 try:
         device = cmdline.create_device(args)
     except error.Error as e:
-        parser.error(e
+        parser.error(e)
 
 
 def posn(angle, arm_length):

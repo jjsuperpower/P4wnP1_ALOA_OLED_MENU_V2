@@ -9,6 +9,7 @@ from luma.core.render import canvas
 parser = cmdline.create_parser(description=None)
 conf = cmdline.load_config("./lcd.conf")
 args = parser.parse_args(conf)
+print("testing")
 print(args)
 device = cmdline.create_device(args)
 

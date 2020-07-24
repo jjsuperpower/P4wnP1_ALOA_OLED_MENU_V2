@@ -38,6 +38,7 @@ parser = cmdline.create_parser(description=None)
 conf = cmdline.load_config("./lcd.conf")
 args = parser.parse_args(conf)
 print(print(display_settings(args)))
+print("testing")
 device = cmdline.create_device(args)
 
 

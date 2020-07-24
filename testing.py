@@ -92,7 +92,6 @@ def main():
 
 if __name__ == "__main__":
     try:
-        device = get_device()
         main()
     except KeyboardInterrupt:
         pass

@@ -40,7 +40,7 @@ GPIO.setwarnings(False)
 #P4wnP1 essential const
 hidpath = "/usr/local/P4wnP1/HIDScripts/"
 sshpath = "/usr/local/P4wnP1/scripts/"
-displayConfPath = "./conf.txt"
+displayConfPath = "./lcd.conf"
 
 #read in config file and setup device
 parser = cmdline.create_parser(description=None)
@@ -72,8 +72,8 @@ fichier=""
 x = 0
 
 #GPIO define and OLED configuration
-RST_PIN        = args.gpio-reset #waveshare settings
-CS_PIN         = args.gpio-data-command  #waveshare settings
+RST_PIN        = 27#args.gpio-reset #waveshare settings
+CS_PIN         = 8 #args.gpio-data-command  #waveshare settings
 DC_PIN         = 24 #waveshare settings
 KEY_UP_PIN     = 6  #stick up
 KEY_DOWN_PIN   = 19 #stick down
